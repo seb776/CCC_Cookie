@@ -10002,6 +10002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Controller: {fileID: 544561135}
   Animator: {fileID: 2023030894}
+  Speed: 0
 --- !u!4 &544561137
 Transform:
   m_ObjectHideFlags: 0
@@ -19625,6 +19626,8 @@ GameObject:
   - component: {fileID: 1493014010}
   - component: {fileID: 1493014009}
   - component: {fileID: 1493014008}
+  - component: {fileID: 1493014012}
+  - component: {fileID: 1493014011}
   m_Layer: 0
   m_Name: Quad
   m_TagString: Untagged
@@ -19689,7 +19692,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: d0ab8a6bd7df9ae4ca4461f930ec19d2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19719,6 +19722,52 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493014006}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1493014011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493014006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b19b71cbecb56d439939854b123c33b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!328 &1493014012
+VideoPlayer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1493014006}
+  m_Enabled: 1
+  m_VideoClip: {fileID: 32900000, guid: a584ca8e23e46a942b30d892d97b9e4c, type: 3}
+  m_TargetCameraAlpha: 1
+  m_TargetCamera3DLayout: 0
+  m_TargetCamera: {fileID: 0}
+  m_TargetTexture: {fileID: 0}
+  m_TimeReference: 0
+  m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: <noninit>
+  m_RenderMode: 2
+  m_AspectRatio: 5
+  m_DataSource: 0
+  m_TimeUpdateMode: 2
+  m_PlaybackSpeed: 1
+  m_AudioOutputMode: 2
+  m_TargetAudioSources: []
+  m_DirectAudioVolumes: []
+  m_Url: 
+  m_EnabledAudioTracks: 
+  m_DirectAudioMutes: 
+  m_ControlledAudioTrackCount: 0
+  m_PlayOnAwake: 1
+  m_SkipOnDrop: 1
+  m_Looping: 1
+  m_WaitForFirstFrame: 1
+  m_FrameReadyEventEnabled: 0
+  m_VideoShaders: []
 --- !u!1001 &1501232351
 PrefabInstance:
   m_ObjectHideFlags: 0
