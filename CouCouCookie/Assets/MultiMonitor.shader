@@ -7,6 +7,11 @@ Shader "Unlit/MultiMonitor"
         _OffsetPosition("Offset Position", Vector) = (0,0,0,0)
         _Scale("Scale", Vector) = (1,1,1,1)
 
+        _NeedsMapping("NeedsMapping", Float) = 0
+
+        _ScreenOffset("_ScreenOffset", Vector) = (0,0,0,0)
+        _ScreenScale("_ScreenScale", Float) = 1
+
         _ChromaStrength("Chroma strength", Range(0.0, 0.1)) = 0.01
     }
     SubShader
@@ -47,6 +52,10 @@ Shader "Unlit/MultiMonitor"
             float2 _OffsetPosition;
             float2 _Scale;
 
+            float2 _ScreenOffset;
+            float _ScreenScale;
+            float _NeedsMapping;
+
 
             v2f vert (appdata v)
             {
@@ -60,18 +69,27 @@ Shader "Unlit/MultiMonitor"
             fixed4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-                uv = mul(uv, rot(radians(_Angle)));
-                uv += _OffsetPosition;
-                uv *= _Scale;
 
-                float pix = 0.02;
+
+                uv *= _ScreenScale;
+                uv += _ScreenOffset;
+
+                if (_NeedsMapping > 0.5) {
+                    uv = mul(uv, rot(radians(_Angle)));
+                    uv += _OffsetPosition;
+                    uv *= _Scale;
+                }
+
+
+                float pix = 0.01;
                 uv = floor(uv / pix) * pix;
-
                 float2 chromaDir = float2(_ChromaStrength, 0.);
                 fixed4 col = 1.0;//tex2D(_MainTex, uv);
                 col.r = tex2D(_MainTex, uv + chromaDir).r;
                 col.g = tex2D(_MainTex, uv).g;
                 col.b = tex2D(_MainTex, uv - chromaDir).b;
+
+
 
                 UNITY_APPLY_FOG(i.fogCoord, col);
                 return col;
