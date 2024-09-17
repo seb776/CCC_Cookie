@@ -1,9 +1,8 @@
-Shader "Unlit/SplashShader"
+Shader "Unlit/PostEffectShader"
 {
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-_AnimationProgress("_AnimationProgress", Float) = 0
     }
     SubShader
     {
@@ -35,7 +34,7 @@ _AnimationProgress("_AnimationProgress", Float) = 0
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-float _AnimationProgress;
+            sampler2D _BlitTexture;
 
             v2f vert (appdata v)
             {
@@ -46,24 +45,16 @@ float _AnimationProgress;
                 return o;
             }
 
-            fixed4 frag(v2f i) : SV_Target
+            fixed4 frag (v2f i) : SV_Target
             {
-                float2 uv = i.uv;
+//                    uint2 pixelCoords = uint2(i.uv * _ScreenSize.xy);
+            //float4 col = LOAD_TEXTURE2D_X_LOD(_BlitTexture, i.uv, 0).zxy;
                 // sample the texture
-                fixed4 col = tex2D(_MainTex, i.uv);
-    float2 cuv = i.uv - .5;
-    float scaleF = 1.0f;
-    if (col.a < 0.5)
-    {
-        float2 cuv2 = cuv;// *lerp(100., 1., pow(saturate(_AnimationProgress * 5.), .25));
-        col.rgb = 1. * pow(1. - saturate(length(cuv2 * 2.)), 4.);
-        float an = atan2(cuv.y, cuv.x);
-        col.rgb += 1. * pow(1. - saturate(length(cuv2 * 2.)), 4.) * saturate(sin(an * 10.+_Time.y));
-    }
-    col *= saturate((_AnimationProgress - .2) * 5.);
-    col *= 1.-saturate((_AnimationProgress - .8) * 5.);
-    // apply fog
+                fixed4 col = tex2D(_BlitTexture, i.uv);
+            col.xyz = col.xxx;
+                // apply fog
                 UNITY_APPLY_FOG(i.fogCoord, col);
+                col = float4(1., 0., 0., 1.);
                 return col;
             }
             ENDCG
