@@ -38,7 +38,7 @@ public class HandleLastScreen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Button)
+        if (Button || Input.GetKeyDown(KeyCode.R))
         {
             StartCredits();
             Button = false;

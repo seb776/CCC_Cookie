@@ -22,6 +22,7 @@ public class MoveCharacter : MonoBehaviour
         this.gameObject.transform.Rotate(Vector3.up, Input.GetAxis("Horizontal")*Time.deltaTime*100.0f);
         Animator.SetBool("Walking", moveDir.magnitude > 0.1f || Input.GetAxis("Horizontal") > 0.1f);
         Controller.SimpleMove(moveDir*Speed);
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_isSat)
