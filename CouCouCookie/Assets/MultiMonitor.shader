@@ -69,10 +69,8 @@ Shader "Unlit/MultiMonitor"
             fixed4 frag(v2f i) : SV_Target
             {
                 float2 uv = i.uv;
-
-
-                uv *= _ScreenScale;
                 uv += _ScreenOffset;
+                uv *= _ScreenScale;
 
                 if (_NeedsMapping > 0.5) {
                     uv = mul(uv, rot(radians(_Angle)));
@@ -81,7 +79,7 @@ Shader "Unlit/MultiMonitor"
                 }
 
 
-                float pix = 0.01;
+                float pix = 0.001;
                 uv = floor(uv / pix) * pix;
                 float2 chromaDir = float2(_ChromaStrength, 0.);
                 fixed4 col = 1.0;//tex2D(_MainTex, uv);
