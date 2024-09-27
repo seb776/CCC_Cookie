@@ -9833,7 +9833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Text: {fileID: 1656239383}
-  Speed: 0.1
+  Speed: 0.05
   Button: 0
 --- !u!1001 &472727905
 PrefabInstance:
